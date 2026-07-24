@@ -1,2 +1,5 @@
 # Environment Dependencies
+google-genai
+google-generativeai
+pytest
 # List all required python packages here.
