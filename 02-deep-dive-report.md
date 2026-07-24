@@ -2,11 +2,11 @@
 
 ## 📌 Thông tin Nhóm
 - **Tên nhóm / Dự án:** bandau
-- **Thành viên:**
-bandau - Phùng Văn Đạt - 2A202602012
-bandau - Nguyễn Văn Đạt - 2A202601969
-bandah - Diêm Công Thành - 2A202601689
-bandau - Hoàng Tuấn Trung - 2A202601807
+- **Thành viên:**<br>
+bandau - Phùng Văn Đạt - 2A202602012 <br>
+bandau - Nguyễn Văn Đạt - 2A202601969 <br>
+bandah - Diêm Công Thành - 2A202601689 <br>
+bandau - Hoàng Tuấn Trung - 2A202601807 <br>
 bandau - Bùi Thế Huy - 2A202601881
 ---
 
