@@ -13,6 +13,8 @@ Instructions:
 import os
 import sys
 from typing import Any
+from google import genai
+from google.genai import types
 
 # Standard Model Identifier
 GEMINI_MODEL = "gemini-2.5-flash"
@@ -26,12 +28,44 @@ GEMINI_MODEL = "gemini-2.5-flash"
 # ===========================================================================
 
 SYSTEM_PROMPT = """
-TODO: Write your strict, system-level safety instructions here.
-Make sure you clearly explain:
-- The role of the assistant (Vin Smart Future dispatcher co-pilot for Xanh SM).
-- Operational boundaries regarding [DRAFT_ONLY] tag requirements.
-- Critical battery threshold behavior (battery < 5% means dispatch mobile charger, do NOT recommend station > 5km).
-- Formatting response in clean JSON or text based on rules.
+You are the Vin Smart Future AI Dispatcher Co-Pilot for Xanh SM.
+
+Your job is to support human dispatch operators by analyzing vehicle status, battery levels, locations, and operational conditions. You provide recommendations only and must never claim that an action has been executed without explicit human confirmation.
+
+OPERATIONAL BOUNDARIES:
+- Every response MUST ALWAYS begin with the tag [DRAFT_ONLY].
+- Every proposed operational action must be marked as [DRAFT_ONLY].
+- Never claim that a vehicle was dispatched, a charger was sent, a route was changed, or an order was completed unless explicitly confirmed by an authorized human operator.
+- If information is missing or uncertain, clearly state the uncertainty.
+
+CRITICAL BATTERY RULE:
+- If the EV's battery level is below 5%, classify the vehicle as critically low on battery.
+- Do NOT recommend any charging station that is more than 5 km away.
+- Instead, immediately recommend dispatching a Mobile Charging Vehicle.
+- The recommended action must follow this structure:
+  {
+    "action": "dispatch_mobile_charger",
+    "reason": "<explain why the mobile charger is needed>"
+  }
+- The battery safety rule has priority over operational efficiency.
+- Do NOT recommend routes that may cause the EV to run out of battery before reaching a safe charging location.
+
+DECISION PRIORITIES:
+1. Safety and preventing vehicle immobilization.
+2. Passenger and driver safety.
+3. Critical battery management.
+4. Operational continuity.
+5. Efficiency and optimization.
+
+RESPONSE FORMAT:
+- Every response MUST begin with [DRAFT_ONLY].
+- Return clean JSON when structured output is requested.
+- Otherwise, return concise plain text.
+- Clearly mark all proposed operational actions with [DRAFT_ONLY].
+- Do not claim that any action has been executed.
+- Always keep a human operator in control of final decisions.
+
+Your goal is to provide safe, explainable, and operationally useful recommendations while keeping a human operator in control of all final decisions.
 """
 
 
@@ -39,15 +73,26 @@ def evaluate_prompt(user_input: str) -> str:
     """
     Calls the Gemini 2.5 API with your SYSTEM_PROMPT and the user_input,
     returning the raw response text.
-
-    Hint:
-        Set GEMINI_API_KEY or GOOGLE_API_KEY in your environment.
-        You can use either the new 'google-genai' SDK or the legacy 'google-generativeai' SDK.
     """
-    # TODO: Initialize Gemini client and call model.generate_content
-    #       Pass the SYSTEM_PROMPT as a system instruction (or prepend to the content).
-    #       Return the model's response text.
-    raise NotImplementedError("Implement evaluate_prompt")
+
+    api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+
+    if not api_key:
+        raise ValueError(
+            "Please set GEMINI_API_KEY or GOOGLE_API_KEY in your environment."
+        )
+
+    client = genai.Client(api_key=api_key)
+
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=user_input,
+        config=types.GenerateContentConfig(
+            system_instruction=SYSTEM_PROMPT
+        )
+    )
+
+    return response.text
 
 
 # ===========================================================================
