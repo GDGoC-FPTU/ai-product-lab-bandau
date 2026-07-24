@@ -3,9 +3,11 @@
 ## 📌 Thông tin Nhóm
 - **Tên nhóm / Dự án:** bandau
 - **Thành viên:**
-  1. Phùng Văn Đạt - MSSV: 2A202602012
-  2. Bùi Thế Huy - MSSV: 2A202601881
-  3. Hoàng Tuấn Trung - MSSV: 2A202601807
+bandau - Phùng Văn Đạt - 2A202602012
+bandau - Nguyễn Văn Đạt - 2A202601969
+bandah - Diêm Công Thành - 2A202601689
+bandau - Hoàng Tuấn Trung - 2A202601807
+bandau - Bùi Thế Huy - 2A202601881
 ---
 
 ## 1. System Prompt Design & Boundaries
