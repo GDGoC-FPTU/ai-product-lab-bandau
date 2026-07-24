@@ -5,7 +5,7 @@
 - **Thành viên:**
   1. Phùng Văn Đạt - MSSV: 2A202602012
   2. Bùi Thế Huy - MSSV: 2A202601881
-
+  3. Hoàng Tuấn Trung - MSSV: 2A202601807
 ---
 
 ## 1. System Prompt Design & Boundaries
