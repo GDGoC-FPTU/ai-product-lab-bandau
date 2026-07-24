@@ -3,8 +3,11 @@
 ## 📌 Thông tin Nhóm
 - **Tên nhóm / Dự án:** bandau
 - **Thành viên:**
-  1. Phùng Văn Đạt - MSSV: 2A202602012
-
+  1. Phùng Văn Đạt -  2A202602012
+  2. Nguyễn  Văn Đạt  - 2A202601969
+  3. Diêm Công Thành - 2A202601689
+  4. HoangTuanTrung_2A202601807
+  5. Bùi Thế Huy - 2A202601881
 ---
 
 ## 1. System Prompt Design & Boundaries
